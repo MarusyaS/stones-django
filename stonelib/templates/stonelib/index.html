@@ -1,0 +1,22 @@
+<!-- <ul>
+{% for inscription in insc_list %}
+    <li><a href="/stonelib/inscription/{{ inscription.InscriptionID }}/">{{ inscription.InscriptionName }}</a></li>
+{% endfor %}
+</ul> -->
+
+<table>
+<tr>
+    <th>header1</th>
+    <th>header2</th>
+    <th>header3</th>
+    <th>header4</th>
+</tr>
+{% for inscription in insc_list %}
+<tr>
+    <th> <a href="/stonelib/inscription/{{ inscription.ID }}/">{{ inscription.Name }}</a></th>
+    <th> {{ inscription.Name }}</th>
+    <th> {{ inscription.NameVariations }}</th>
+    <th> {{ inscription.DigitalDocumentation }}</th>
+</tr> 
+{% endfor %}
+</table>
