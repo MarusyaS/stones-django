@@ -14,9 +14,11 @@ class InscriptionSerializer(serializers.HyperlinkedModelSerializer):
     # sites = serializers.StringRelatedField(many=True)
     site_country = serializers.CharField(source='Site.Country')
     site_region = serializers.CharField(source='Site.Region')
+    site_Lat = serializers.FloatField(source='Site.LAT', allow_null = True)
+    site_Lon = serializers.FloatField(source='Site.LON', allow_null = True)
     class Meta:
         model = Inscription
-        fields = ['ID', 'Name', 'ContextType', 'site_country','site_region', 'DigitalDocumentation' ]
+        fields = ['ID', 'Name', 'ContextType', 'site_country','site_region', 'DigitalDocumentation' , 'site_Lat', 'site_Lon' ]
         # 'Country', 'Region',
 
 # ViewSets define the view behavior.
@@ -39,23 +41,24 @@ class SingleInscriptionView(viewsets.ModelViewSet):
     # model = Inscription
 
 
-# class SingleInscriptionView(APIView):      
-#     def get_objects(self,nm):
-#         try: 
-#             return Inscription.objects.get(pk = nm)
-#         except Inscription.DoesNotExist:
-#             raise Http404('Not found')
+class MapSerializer(serializers.HyperlinkedModelSerializer):
+    # sites = serializers.StringRelatedField(many=True)
+    # site_country = serializers.CharField(source='Site.Country')
+    # site_region = serializers.CharField(source='Site.Region')
+    # site_topname = serializers.CharField(source='Site.NameToponim')
+    # site_person = serializers.CharField(source='Site.NamePerson')
+    # site_Lat = serializers.FloatField(source='Site.LAT', allow_null = True)
+    # site_Lon = serializers.FloatField(source='Site.LON', allow_null = True)
 
+    class Meta:
+        model = Site
+        fields = [ 'ID','LAT', 'LON', 'NameToponim', 'NamePerson', 'Type','FirstNotion', 'YearExcavate']
+        # 'Country', 'Region',
 
-#     def get(self,request,nm,format =None):
-#         item = self.get_objects(nm)
-#         serializer = SingleInscriptionSerializer(item)
-#         return JsonResponse(serializer.data)
+class MapView(viewsets.ModelViewSet): 
 
-#         return HttpResponse(status =status.HTTP_204_NO_CONTENT)
-
-    # queryset = Inscription.objects.select_related('Site').get(id=ID)
-
+    queryset = Site.objects.exclude(LAT=None)
+    serializer_class = MapSerializer
 
 # # Routers provide an easy way of automatically determining the URL conf.
 # router = routers.DefaultRouter()
@@ -66,5 +69,5 @@ urlpatterns = [
     path('inscription', InscriptionViewSet.as_view({'get': 'list'}), name='inscription-list'),
     # path('inscription/<str:ID>/', views.single_inscription, name='single_inscription'),
     path('inscription/<str:pk>/', SingleInscriptionView.as_view({'get': 'retrieve'}), name='inscription-detail'),
-    
+    path('map', MapView.as_view({'get': 'list'}), name='map'),  
 ]

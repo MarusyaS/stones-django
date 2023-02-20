@@ -8,12 +8,12 @@ class Site(models.Model):
     NameVariations = models.TextField()
     Type = models.TextField()
     FirstNotion = models.TextField()
-    YearExcavate = models.IntegerField()
+    YearExcavate = models.IntegerField( null=True)
     Country = models.TextField()
     Region = models.TextField()
     Area = models.TextField()
-    LAT = models.FloatField()
-    LON = models.FloatField()
+    LAT = models.FloatField( null=True)
+    LON = models.FloatField( null=True)
     # LAT = models.DecimalField( max_digits=13, decimal_places=10)
     # LON = models.DecimalField( max_digits=13, decimal_places=10)
 
@@ -32,8 +32,8 @@ class Inscription(models.Model):
     CitVasilev = models.CharField(max_length=10)
     CitBazylhan = models.CharField(max_length=10)
     CitKormushin = models.CharField(max_length=10)
-    LAT = models.FloatField()
-    LON = models.FloatField()
+    LAT = models.FloatField( null=True)
+    LON = models.FloatField( null=True)
     # LAT = models.DecimalField( max_digits=13, decimal_places=10)
     # LON = models.DecimalField( max_digits=13, decimal_places=10)
     Site = models.ForeignKey(Site, related_name='sites', db_column = 'Site_id', on_delete = models.SET_NULL, blank=True, null=True)
@@ -51,10 +51,10 @@ class Museum(models.Model):
     Name = models.CharField(max_length=30)
     OfficialName = models.TextField()
     InstitutionClass = models.TextField()
-    LAT = models.FloatField()
-    LON = models.FloatField()
+    LAT = models.FloatField( null=True)
+    LON = models.FloatField( null=True)
     Dates = models.DateField()
-    Docnumber = models.IntegerField()
+    Docnumber = models.IntegerField( null=True)
     Docmethod = models.TextField()
     Description = models.TextField()
     Country = models.TextField()
@@ -64,7 +64,7 @@ class Museum(models.Model):
         max_length=128, 
         # db_index=True, 
         # unique=True, 
-        # blank=True
+        blank=True
     )
     Showing = models.TextField() #should be boolean 
    
@@ -79,11 +79,11 @@ class Model3D(models.Model):
     Process = models.TextField()
     Camera = models.TextField()
     Lens = models.TextField()
-    FrameCount = models.IntegerField()
+    FrameCount = models.IntegerField( null=True)
     Scheme = models.TextField()
     Date = models.DateField()
-    PolygonCount = models.IntegerField()
-    PolygonCM = models.FloatField()
+    PolygonCount = models.IntegerField( null=True)
+    PolygonCM = models.FloatField( null=True)
     Link = models.URLField(
         ("ModelID"), 
         max_length=128, 
