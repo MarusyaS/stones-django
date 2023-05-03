@@ -14,11 +14,11 @@ class InscriptionSerializer(serializers.HyperlinkedModelSerializer):
     # sites = serializers.StringRelatedField(many=True)
     site_country = serializers.CharField(source='Site.Country')
     site_region = serializers.CharField(source='Site.Region')
-    site_Lat = serializers.FloatField(source='Site.LAT', allow_null = True)
-    site_Lon = serializers.FloatField(source='Site.LON', allow_null = True)
+    # site_Lat = serializers.FloatField(source='Site.LAT', allow_null = True)
+    # site_Lon = serializers.FloatField(source='Site.LON', allow_null = True)
     class Meta:
         model = Inscription
-        fields = ['ID', 'Name', 'ContextType', 'site_country','site_region', 'DigitalDocumentation' , 'site_Lat', 'site_Lon' ]
+        fields = ['ID', 'Name', 'ContextType', 'site_country','site_region', 'DigitalDocumentation' , 'CitDTS', 'CitVasilev', 'CitBazylhan', 'CitKormushin']
         # 'Country', 'Region',
 
 # ViewSets define the view behavior.
@@ -40,20 +40,18 @@ class SingleInscriptionView(viewsets.ModelViewSet):
     serializer_class = SingleInscriptionSerializer
     # model = Inscription
 
+class InscMapSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inscription
+        fields = ['ID', 'Name']
 
-class MapSerializer(serializers.HyperlinkedModelSerializer):
-    # sites = serializers.StringRelatedField(many=True)
-    # site_country = serializers.CharField(source='Site.Country')
-    # site_region = serializers.CharField(source='Site.Region')
-    # site_topname = serializers.CharField(source='Site.NameToponim')
-    # site_person = serializers.CharField(source='Site.NamePerson')
-    # site_Lat = serializers.FloatField(source='Site.LAT', allow_null = True)
-    # site_Lon = serializers.FloatField(source='Site.LON', allow_null = True)
+class MapSerializer(serializers.ModelSerializer):
+
+    sites = InscMapSerializer(many=True)
 
     class Meta:
         model = Site
-        fields = [ 'ID','LAT', 'LON', 'NameToponim', 'NamePerson', 'Type','FirstNotion', 'YearExcavate']
-        # 'Country', 'Region',
+        fields =  [ 'ID','LAT', 'LON', 'NameToponim', 'NamePerson', 'Type','FirstNotion', 'YearExcavate', 'sites']
 
 class MapView(viewsets.ModelViewSet): 
 
