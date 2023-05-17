@@ -36,7 +36,7 @@ class Inscription(models.Model):
     LON = models.FloatField( null=True)
     # LAT = models.DecimalField( max_digits=13, decimal_places=10)
     # LON = models.DecimalField( max_digits=13, decimal_places=10)
-    Site = models.ForeignKey(Site, related_name='sites', db_column = 'Site_id', on_delete = models.SET_NULL, blank=True, null=True)
+    Site = models.ForeignKey(Site, related_name='inscriptions', db_column = 'Site_id', on_delete = models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.Name
@@ -94,7 +94,7 @@ class Model3D(models.Model):
     Site = models.ForeignKey(Museum, db_column = 'Site_id', on_delete = models.SET_NULL, db_constraint = False,
     blank=True,
     null=True)
-    Inscription = models.ForeignKey(Inscription, db_column = 'Inscription_id', on_delete = models.SET_NULL, 
+    Inscription = models.ForeignKey(Inscription, related_name='models', db_column = 'Inscription_id', on_delete = models.SET_NULL, 
     # db_constraint = False,
     blank=True,
     null=True)  # if you have a nullable ForignKey and you want it to be set null when the referenced object is deleted
@@ -103,13 +103,13 @@ class Model3D(models.Model):
         return self.ID
 
 class Image(models.Model):
-    ID = models.CharField(max_length=5, primary_key=True, unique = True)
-    Inscription = models.ForeignKey(Inscription, db_column = 'Inscription_id',on_delete = models.SET_NULL,
+    ID = models.CharField(max_length=10, primary_key=True, unique = True)
+    Inscription = models.ForeignKey(Inscription, related_name='images',db_column = 'Inscription_id',on_delete = models.SET_NULL,
     blank=True,
     null=True)  # if you have a nullable ForignKey and you want it to be set null when the referenced object is deleted
 
     Type = models.TextField()
-    AdditionalDescription = models.TextField()
+    AdditionalDescription = models.TextField(blank=True)
     Link = models.URLField(
         # ("ModelID"), 
         max_length=128, 
