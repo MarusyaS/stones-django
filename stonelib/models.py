@@ -82,7 +82,7 @@ class Model3D(models.Model):
     FrameCount = models.IntegerField( null=True)
     Scheme = models.TextField()
     Date = models.DateField()
-    PolygonCount = models.IntegerField( null=True)
+    PolygonCount = models.FloatField( null=True)
     PolygonCM = models.FloatField( null=True)
     Link = models.URLField(
         ("ModelID"), 

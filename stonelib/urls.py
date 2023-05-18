@@ -32,7 +32,8 @@ class InscriptionViewSet(viewsets.ModelViewSet):
 class InscModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Model3D
-        fields = ['ID']
+        fields = ['ID', 'Process', 'Camera', 'Lens', 'FrameCount', 'Scheme',\
+                  'Date', 'PolygonCount', 'PolygonCM', 'Site']
 
 class InscImageSerializer(serializers.ModelSerializer):
     class Meta:
