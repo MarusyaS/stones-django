@@ -16,7 +16,8 @@
 
 
 # Base image
-FROM python:3.8.13-bullseye 
+FROM python:3.10-alpine
+# python:3.8.13-bullseye 
 # python:3.10.4-alpine
 # python:3.10.4-slim-buster 
 

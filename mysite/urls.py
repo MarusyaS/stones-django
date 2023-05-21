@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-
+from stonelib.views import index
+from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('stonelib/', include('stonelib.urls'))
+    path('stonelib/', include('stonelib.urls')),
+    re_path(r'app/*', index, name='index'),
+
 ]
