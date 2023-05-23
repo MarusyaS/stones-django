@@ -45,16 +45,26 @@ class InscImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields = ['ID', 'Type']
-class SingleInscriptionSerializer(serializers.HyperlinkedModelSerializer):
+
+class SingleInscriptionSerializer(serializers.ModelSerializer):
+    related_inscriptions = serializers.SerializerMethodField()
     site_country = serializers.CharField(source='Site.Country')
     site_region = serializers.CharField(source='Site.Region')
     models = InscModelSerializer(many=True)
     images = InscImageSerializer(many=True)
-                                     
+
     class Meta:
         model = Inscription
-        fields = ['ID', 'Name','NameVariations', 'ContextType', 'CitDTS', \
-         'CitVasilev', 'CitBazylhan','site_country','site_region', 'models', 'images'  ]
+        fields = fields = ['ID', 'Name','NameVariations', 'ContextType', 'CitDTS', \
+         'CitVasilev', 'CitBazylhan','site_country','site_region', 'models', 'images',\
+'related_inscriptions'  ]
+  
+
+    def get_related_inscriptions(self, obj):
+        related = Inscription.objects.filter(Site=obj.Site).exclude(ID=obj.ID).values('ID', 'Name')
+        return related
+# class SingleInscriptionSerializer(serializers.HyperlinkedModelSerializer):
+
 
 class SingleInscriptionView(viewsets.ModelViewSet): 
 

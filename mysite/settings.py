@@ -86,6 +86,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'stonelib/static/build/static'),  # update the STATICFILES_DIRS
 )
+# STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
