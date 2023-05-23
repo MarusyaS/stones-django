@@ -17,10 +17,14 @@ from django.contrib import admin
 from django.urls import path, include
 from stonelib.views import index
 from django.urls import re_path
+import: from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stonelib/', include('stonelib.urls')),
     re_path(r'app/*', index, name='index'),
 
-]
+] 
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

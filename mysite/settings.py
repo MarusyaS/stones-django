@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import mimetypes
+
+mimetypes.add_type("text/javascript", ".js", True)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +32,7 @@ SECRET_KEY = 'django-insecure-x!4krbn^n7qats3zx-6=%y*+u#fqd$hl6%__!2h_-d45yq85z8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sandbox.rssda.su']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -86,7 +89,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'stonelib/static/build/static'),  # update the STATICFILES_DIRS
 )
-# STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+STATIC_ROOT = "sandbox.rssda.su/www/static/"
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
