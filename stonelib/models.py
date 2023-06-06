@@ -1,21 +1,18 @@
 from django.db import models
-import datetime
 
 class Site(models.Model):
     ID = models.CharField(max_length=5, primary_key=True, unique = True)
     NameToponim = models.CharField(max_length=30)
-    NamePerson = models.TextField()
-    NameVariations = models.TextField()
+    NamePerson = models.TextField(blank=True, null=True)
+    NameVariations = models.TextField(blank=True, null=True)
     Type = models.TextField()
-    FirstNotion = models.TextField()
-    YearExcavate = models.IntegerField( null=True)
+    FirstNotion = models.TextField(blank=True, null=True)
+    YearExcavate = models.IntegerField( blank=True, null=True)
     Country = models.TextField()
     Region = models.TextField()
     Area = models.TextField()
-    LAT = models.FloatField( null=True)
-    LON = models.FloatField( null=True)
-    # LAT = models.DecimalField( max_digits=13, decimal_places=10)
-    # LON = models.DecimalField( max_digits=13, decimal_places=10)
+    LAT = models.FloatField( blank=True, null=True)
+    LON = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         # return self.NameToponim 
@@ -25,26 +22,25 @@ class Site(models.Model):
 class Inscription(models.Model):
     ID = models.CharField(max_length=6, primary_key=True, unique = True)
     Name = models.TextField()
-    NameVariations = models.TextField()
+    NameVariations = models.TextField(blank=True, null=True)
     ContextType = models.TextField()
-    DigitalDocumentation = models.TextField() #must be boolean
-    CitDTS = models.CharField(max_length=10)
-    CitVasilev = models.CharField(max_length=10)
-    CitBazylhan = models.CharField(max_length=10)
-    CitKormushin = models.CharField(max_length=10)
-    LAT = models.FloatField( null=True)
-    LON = models.FloatField( null=True)
-    # LAT = models.DecimalField( max_digits=13, decimal_places=10)
-    # LON = models.DecimalField( max_digits=13, decimal_places=10)
+    DigitalDocumentation = models.TextField(blank=True, null=True) #must be boolean
+    CitDTS = models.CharField(max_length=10, blank=True, null=True)
+    CitVasilev = models.CharField(max_length=10, blank=True, null=True)
+    CitBazylhan = models.CharField(max_length=10, blank=True, null=True)
+    CitKormushin = models.CharField(max_length=10, blank=True, null=True)
+    LAT = models.FloatField(blank=True, null=True)
+    LON = models.FloatField( blank=True, null=True)
     Site = models.ForeignKey(Site, related_name='inscriptions', db_column = 'Site_id', on_delete = models.SET_NULL, blank=True, null=True)
+    BitigKz = models.URLField(
+        max_length=128, 
+        db_index=True, 
+        blank=True
+    )
 
     def __str__(self):
         return self.Name
 
-    #def get_absolute_url(self):
-    # """Returns the URL to access a particular instance of the model.\
-    # Of course to make this work you still have to write the URL mapping, view, and template!"""
-      #  return reverse('model-detail-view', args=[str(self.id)])
 
 class Museum(models.Model):
     MusID = models.CharField(max_length=6,  primary_key=True, unique = True)

@@ -24,7 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('stonelib/', include('stonelib.urls')),
-    re_path(r'app/*', index, name='index'),
+    re_path(r'ep_tur/*', index, name='index'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

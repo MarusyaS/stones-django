@@ -19,15 +19,13 @@ def single_inscription(request, ID):
     return render(request, 'stonelib/single_inscription.html', context)
 
 class InscriptionSerializer(serializers.HyperlinkedModelSerializer):
-    # sites = serializers.StringRelatedField(many=True)
     site_country = serializers.CharField(source='Site.Country')
     site_region = serializers.CharField(source='Site.Region')
-    # site_Lat = serializers.FloatField(source='Site.LAT', allow_null = True)
-    # site_Lon = serializers.FloatField(source='Site.LON', allow_null = True)
+
     class Meta:
         model = Inscription
-        fields = ['ID', 'Name', 'ContextType', 'site_country','site_region', 'DigitalDocumentation' , 'CitDTS', 'CitVasilev', 'CitBazylhan', 'CitKormushin']
-        # 'Country', 'Region',
+        fields = ['ID', 'Name', "NameVariations", 'ContextType', 'site_country','site_region', 'DigitalDocumentation' , 'CitDTS', 'CitVasilev', 'CitBazylhan', 'CitKormushin']
+
 
 # ViewSets define the view behavior.
 class InscriptionViewSet(viewsets.ModelViewSet):
@@ -56,7 +54,7 @@ class SingleInscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inscription
         fields = fields = ['ID', 'Name','NameVariations', 'ContextType', 'CitDTS', \
-         'CitVasilev', 'CitBazylhan','site_country','site_region', 'models', 'images',\
+         'CitVasilev', 'CitBazylhan', 'BitigKz', 'site_country','site_region', 'models', 'images',\
 'related_inscriptions'  ]
   
 

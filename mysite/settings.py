@@ -33,8 +33,8 @@ SECRET_KEY = 'django-insecure-x!4krbn^n7qats3zx-6=%y*+u#fqd$hl6%__!2h_-d45yq85z8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['sandbox.rssda.su']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['sandbox.rssda.su']
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -43,6 +43,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django_extensions',
     'stonelib',
     'rest_framework',
     'corsheaders',
@@ -147,3 +148,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
