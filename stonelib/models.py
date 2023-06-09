@@ -5,12 +5,12 @@ class Site(models.Model):
     NameToponim = models.CharField(max_length=30)
     NamePerson = models.TextField(blank=True, null=True)
     NameVariations = models.TextField(blank=True, null=True)
-    Type = models.TextField()
+    Type = models.TextField(blank=True, null=True)
     FirstNotion = models.TextField(blank=True, null=True)
     YearExcavate = models.IntegerField( blank=True, null=True)
-    Country = models.TextField()
-    Region = models.TextField()
-    Area = models.TextField()
+    Country = models.TextField(blank=True, null=True)
+    Region = models.TextField(blank=True, null=True)
+    Area = models.TextField(blank=True, null=True)
     LAT = models.FloatField( blank=True, null=True)
     LON = models.FloatField(blank=True, null=True)
 
@@ -23,7 +23,7 @@ class Inscription(models.Model):
     ID = models.CharField(max_length=6, primary_key=True, unique = True)
     Name = models.TextField()
     NameVariations = models.TextField(blank=True, null=True)
-    ContextType = models.TextField()
+    ContextType = models.TextField(blank=True, null=True)
     DigitalDocumentation = models.TextField(blank=True, null=True) #must be boolean
     CitDTS = models.CharField(max_length=10, blank=True, null=True)
     CitVasilev = models.CharField(max_length=10, blank=True, null=True)
@@ -47,14 +47,12 @@ class Museum(models.Model):
     Name = models.CharField(max_length=30)
     OfficialName = models.TextField()
     InstitutionClass = models.TextField()
-    LAT = models.FloatField( null=True)
-    LON = models.FloatField( null=True)
-    Dates = models.DateField()
-    Docnumber = models.IntegerField( null=True)
+    LAT = models.FloatField(blank=True, null=True)
+    LON = models.FloatField( blank=True, null=True)
     Docmethod = models.TextField()
     Description = models.TextField()
     Country = models.TextField()
-    Adress = models.TextField()
+    Adress = models.TextField(blank=True)
     Link = models.URLField(
         # ("ModelID"), 
         max_length=128, 
@@ -71,22 +69,18 @@ class Museum(models.Model):
 
 class Model3D(models.Model):
     ID = models.CharField(max_length=6,  primary_key=True, unique = True)
-    Object = models.TextField()
+    Object = models.TextField(blank=True,)
     Process = models.TextField()
     Camera = models.TextField()
     Lens = models.TextField()
-    FrameCount = models.IntegerField( null=True)
+    FrameCount = models.IntegerField(blank=True, null=True)
     Scheme = models.TextField()
     Date = models.DateField()
-    PolygonCount = models.FloatField( null=True)
-    PolygonCM = models.FloatField( null=True)
-    Link = models.URLField(
-        ("ModelID"), 
-        max_length=128, 
-        db_index=True, 
-        # unique=True, 
-        blank=True
-    )
+    Photographer =  models.TextField(blank=True,)
+    ModelProcesser =  models.TextField(blank=True,)
+    PolygonCountMaster = models.FloatField( blank=True, null=True)
+    PolygonCountGeneral = models.FloatField( blank=True, null=True)
+    AreaCM = models.IntegerField( blank=True, null=True)
     Site = models.ForeignKey(Museum, db_column = 'Site_id', on_delete = models.SET_NULL, db_constraint = False,
     blank=True,
     null=True)
@@ -106,10 +100,3 @@ class Image(models.Model):
 
     Type = models.TextField()
     AdditionalDescription = models.TextField(blank=True)
-    Link = models.URLField(
-        # ("ModelID"), 
-        max_length=128, 
-        db_index=True, 
-        # unique=True, 
-        blank=True
-    )

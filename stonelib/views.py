@@ -37,7 +37,7 @@ class InscModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Model3D
         fields = ['ID', 'Process', 'Camera', 'Lens', 'FrameCount', 'Scheme',\
-                  'Date', 'PolygonCount', 'PolygonCM', 'Site']
+                  'Date','Photographer', 'ModelProcesser', 'PolygonCountMaster', 'PolygonCountGeneral','AreaCM', 'Site']
 
 class InscImageSerializer(serializers.ModelSerializer):
     class Meta:
