@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 from django.template import loader
 from rest_framework import routers, serializers, viewsets
@@ -7,8 +7,16 @@ from rest_framework import routers, serializers, viewsets
 from django.views.generic.detail import DetailView
 from stonelib.models import Inscription, Site, Model3D, Image, Museum
 
+from django.views.generic import View
+
+import os
+
 def index(request):
+    print('in index')
+    print(request)
     return render(request, 'index.html')
+
+
 
 def single_inscription(request, ID):
     

@@ -30,6 +30,9 @@ BACKEND_DIR = BASE_DIR  # rename variable for clarity
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-x!4krbn^n7qats3zx-6=%y*+u#fqd$hl6%__!2h_-d45yq85z8'
 
+# with open("secret_key.txt") as f:
+#     SECRET_KEY = f.read().strip()
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -92,7 +95,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'stonelib/static/build/static'),  # update the STATICFILES_DIRS
 )
 
-STATIC_ROOT = '/home/u187324/sandbox.rssda.su/www/static/'
+# STATIC_ROOT = '/home/u187324/sandbox.rssda.su/www/static/'
+STATIC_ROOT = '/home/marsy/tmp'
 # STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
